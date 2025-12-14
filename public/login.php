@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../config/config.php';
 
-// Jika sudah login -> redirect ke dashboard langsung
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -17,29 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($userInput === '' || $passInput === '') {
         $error = "Username dan Password wajib diisi.";
     } else {
-        // 1. Ambil data user dari database berdasarkan username
         $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$userInput]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            // 2. Cek Password (Mendukung Hash & Plain Text)
             $isValid = false;
             
-            // Cek apakah password di database hash atau text biasa
             if (password_verify($passInput, $data['password'])) {
-                $isValid = true; // Cocok dengan hash
+                $isValid = true; 
             } elseif ($passInput === $data['password']) {
-                $isValid = true; // Cocok dengan text biasa (untuk testing)
+                $isValid = true; 
             }
 
             if ($isValid) {
-                // --- BAGIAN KUNCI AGAR "HALO" MUNCUL ---
                 $_SESSION['user_id']  = $data['id'];
                 $_SESSION['role']     = $data['role'];
-                $_SESSION['username'] = $data['username']; // <--- Ini yang akan dibaca index.php
-                // ---------------------------------------
-
+                $_SESSION['username'] = $data['username']; 
+                
                 header('Location: index.php');
                 exit();
             } else {
@@ -61,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- GAYA TAMPILAN (CSS) --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         :root {
