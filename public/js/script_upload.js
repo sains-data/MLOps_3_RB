@@ -1,5 +1,5 @@
 const UPLOAD_API_URL = 'process_upload.php';
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('uploadForm');
@@ -13,19 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadProgressText = document.getElementById('uploadProgressText');
     const progressContainer = document.getElementById('progressContainer');
     
-    // --- 1. FILE HANDLER (DRAG & DROP) ---
     if (pdfFileInput && fileNameDisplay && fileUploadArea) {
         
-        // Klik area untuk membuka dialog file
         fileUploadArea.addEventListener('click', () => pdfFileInput.click());
-        // Cegah klik pada input file memicu event parent (infinite loop)
         pdfFileInput.addEventListener('click', (e) => e.stopPropagation());
 
         pdfFileInput.addEventListener('change', () => {
             handleFileSelection(pdfFileInput.files);
         });
 
-        // Event Drag & Drop
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             fileUploadArea.addEventListener(eventName, preventDefaults, false);
         });
@@ -53,26 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (files.length > 0) {
                 const file = files[0];
                 
-                // Validasi PDF di frontend
                 if (file.type !== 'application/pdf') {
                     displayStatus('error', 'Hanya file PDF yang diizinkan.');
                     resetFileUI();
                     return;
                 }
 
-                // Masukkan file ke input (untuk drag & drop)
                 if (files !== pdfFileInput.files) {
-                     const dataTransfer = new DataTransfer();
-                     dataTransfer.items.add(file);
-                     pdfFileInput.files = dataTransfer.files;
+                      const dataTransfer = new DataTransfer();
+                      dataTransfer.items.add(file);
+                      pdfFileInput.files = dataTransfer.files;
                 }
 
-                // Update UI
                 fileNameDisplay.textContent = file.name;
                 fileNameDisplay.style.color = '#001a41';
                 fileUploadArea.classList.add('file-selected');
                 
-                // Reset Progress UI
                 resetProgressUI();
                 if(uploadStatus) uploadStatus.style.display = 'none';
 
@@ -97,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 2. SUBMIT FORM (AJAX) ---
     if (uploadForm) {
         uploadForm.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -113,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Siapkan UI Upload
             submitButton.disabled = true;
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengunggah...';
             if(progressContainer) progressContainer.style.display = 'block';
@@ -140,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (result.success) {
                             displayStatus('success', result.message || 'Berhasil diunggah!');
                             
-                            // Reset Form Total
                             uploadForm.reset();
                             resetFileUI();
                             resetProgressUI();
@@ -166,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
             xhr.send(formData);
         });
 
-        // Tombol Reset
         if (resetButton) {
             resetButton.addEventListener('click', () => {
                 uploadForm.reset();
@@ -183,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadStatus.className = `status-message ${type}`;
         uploadStatus.style.display = 'block';
         
-        // Auto hide pesan sukses setelah 5 detik
         if (type === 'success') {
             setTimeout(() => {
                 uploadStatus.style.display = 'none';
