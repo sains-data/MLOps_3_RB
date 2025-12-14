@@ -5,16 +5,14 @@ if (!isset($_SESSION['user_id'])) {
     die("Akses Ditolak.");
 }
 
-// PERBAIKAN PATH: Tambahkan /../
 require_once __DIR__ . '/../config/config.php';
 
 if (isset($_GET['file'])) {
     $file = str_replace(['../', './', '\\'], '', $_GET['file']);
     if (strpos($file, 'uploads/') === 0) {
-        $file = substr($file, 8); // Hapus 'uploads/'
+        $file = substr($file, 8);
     }
 
-    // Path fisik di public/uploads/
     $path = __DIR__ . '/uploads/' . $file;
 
     if (file_exists($path) && is_file($path)) {
