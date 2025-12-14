@@ -1,10 +1,8 @@
 <?php
-// public/reset_user.php
 require_once __DIR__ . '/../config/config.php';
 
 echo "<h2>⚙️ Reset User Admin</h2>";
 
-// 1. Hapus user admin lama (jika ada) untuk menghindari duplikat
 try {
     $stmt = $pdo->prepare("DELETE FROM users WHERE username = 'admin'");
     $stmt->execute();
@@ -13,13 +11,11 @@ try {
     echo "⚠️ Gagal hapus (mungkin belum ada): " . $e->getMessage() . "<br>";
 }
 
-// 2. Buat Password Hash (Standar Keamanan)
 $username = 'admin';
 $password_plain = '123'; 
 $password_hash = password_hash($password_plain, PASSWORD_DEFAULT);
 $role = 'admin';
 
-// 3. Masukkan User Baru
 try {
     $sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
