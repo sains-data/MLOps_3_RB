@@ -1,14 +1,13 @@
-/* --- CONFIGURATION & COLORS --- */
 :root {
-    --primary: #001a41;       /* Navy MLOps */
+    --primary: #001a41;
     --primary-dark: #000f26;  
-    --accent: #fca12b;        /* Orange Branding */
+    --accent: #fca12b;
     --accent-glow: rgba(252, 161, 43, 0.4);
-    --danger: #ff0025;        /* Merah Delete */
+    --danger: #ff0025;
     
-    --bg-body: #f4f7fa;       
+    --bg-body: #f4f7fa;        
     --bg-card: #ffffff;
-    --text-main: #1e293b;     
+    --text-main: #1e293b;      
     --text-muted: #64748b;    
     --border: #e2e8f0;
     
@@ -16,7 +15,6 @@
     --radius-lg: 16px;
     --radius-full: 9999px;
     
-    /* Shadows */
     --shadow-soft: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
     --shadow-float: 0 20px 40px -10px rgba(0, 26, 65, 0.15); 
 }
@@ -27,7 +25,6 @@ html { scroll-behavior: smooth; }
 body {
     font-family: var(--font-main);
     background-color: var(--bg-body);
-    /* Pattern halus */
     background-image: radial-gradient(circle at 10% 20%, rgba(0, 26, 65, 0.03) 0%, transparent 20%),
                       radial-gradient(circle at 90% 80%, rgba(252, 161, 43, 0.03) 0%, transparent 20%);
     color: var(--text-main);
@@ -35,44 +32,34 @@ body {
     display: flex; flex-direction: column; overflow-x: hidden;
 }
 
-/* =========================================
-   ANIMATIONS (THE LIVING PART)
-   ========================================= */
-
-/* Background Hero Mengalir */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Muncul Halus dari Bawah */
 @keyframes softEntranceUp {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Muncul Pop (Search Bar) */
 @keyframes popIn {
     0% { opacity: 0; transform: translateY(60%) scale(0.95); }
     100% { opacity: 1; transform: translateY(50%) scale(1); }
 }
 
-/* Background Blob Melayang */
 @keyframes floatSlow {
     0% { transform: translate(0, 0); }
     50% { transform: translate(10px, -15px); }
     100% { transform: translate(0, 0); }
 }
 
-/* Breathing Card (Napas Halus) */
 @keyframes breatheCard {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
 }
 
-/* Scroll Reveal Class */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -80,8 +67,6 @@ body {
 }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-
-/* --- NAVBAR --- */
 .navbar {
     height: 70px; background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px); border-bottom: 1px solid rgba(226, 232, 240, 0.8);
@@ -123,13 +108,11 @@ body {
 }
 .btn-logout:hover { background: var(--danger); color: #fff; transform: scale(1.05); }
 
-/* --- HERO SECTION --- */
 .hero {
     position: relative; 
     padding: 90px 20px 110px; 
     text-align: center;
     
-    /* ANIMATED GRADIENT BACKGROUND (Flowing Navy) */
     background: linear-gradient(-45deg, #001a41, #0a2a5c, #004e92, #001a41);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
@@ -160,7 +143,6 @@ body {
     animation: softEntranceUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
 }
 
-/* SEARCH BAR (Floating) */
 .search-bar-wrapper {
     position: relative; max-width: 650px; margin: 0 auto;
     background: #fff; border-radius: var(--radius-full);
@@ -184,13 +166,11 @@ body {
     font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border);
 }
 
-/* --- MAIN CONTENT --- */
 .main-content { 
     max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; width: 100%;
     margin-top: 80px; position: relative; z-index: 2;
 }
 
-/* FILTER CHIPS */
 .filter-section { margin-bottom: 40px; text-align: center; }
 .filter-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; }
 
@@ -209,7 +189,6 @@ body {
 .chip:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
 .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(0, 26, 65, 0.2); }
 
-/* CONTROLS ROW */
 .controls-row {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
     padding-bottom: 20px; border-bottom: 1px dashed var(--border);
@@ -220,29 +199,25 @@ body {
     border: none; background: transparent; font-weight: 700; color: var(--primary); cursor: pointer; font-family: var(--font-main);
 }
 
-/* --- DOCUMENT GRID --- */
 .document-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
 }
 
-/* CARD DESIGN (Clean & Breathing) */
 .doc-card {
     background: #fff; border-radius: var(--radius-lg); padding: 24px;
     border: 1px solid var(--border); 
     position: relative; overflow: hidden; display: flex; flex-direction: column;
     cursor: pointer;
     
-    /* Animation (Staggered + Breathing) set via JS */
     opacity: 0; transform: translateY(20px);
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .doc-card:hover {
     box-shadow: var(--shadow-float); border-color: #cbd5e1;
-    animation-play-state: paused !important; /* Stop breathing on hover */
+    animation-play-state: paused !important; 
     transform: translateY(-5px) !important;
 }
 
-/* Accent Line Kiri (Orange) */
 .doc-card::before {
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
     background: var(--accent); opacity: 0; transition: 0.3s;
@@ -282,7 +257,6 @@ body {
 .action-btn:hover { background: #f1f5f9; color: var(--primary); border-color: var(--border); }
 .action-btn.delete:hover { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
 
-/* --- MODAL DETAIL --- */
 .modal { display: none; position: fixed; z-index: 1000; inset: 0; }
 .modal-backdrop {
     position: absolute; inset: 0; background: rgba(0, 26, 65, 0.8); backdrop-filter: blur(4px);
@@ -324,7 +298,6 @@ body {
 
 iframe { width: 100%; height: 100%; border: none; }
 
-/* PAGINATION */
 .pagination-wrapper { margin-top: 40px; display: flex; justify-content: center; padding-bottom: 40px; }
 .pagination-controls { display: flex; gap: 10px; }
 .page-btn {
@@ -334,7 +307,6 @@ iframe { width: 100%; height: 100%; border: none; }
 .page-btn:hover:not(:disabled) { background: var(--primary); color: #fff; transform: scale(1.1); }
 .page-btn:disabled { opacity: 0.5; }
 
-/* Responsive */
 @media (max-width: 900px) {
     .hero { padding-bottom: 80px; border-radius: 0; }
     .search-bar-wrapper { transform: translateY(20px); width: 90%; }
