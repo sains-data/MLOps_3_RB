@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// 1. Cek Akses Admin (Hanya Asisten/Admin yang boleh upload)
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
@@ -9,7 +8,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 require_once __DIR__ . '/../config/config.php';
 
-// 2. Ambil Data Mata Kuliah
 try {
     $stmt = $pdo->query("SELECT * FROM subjects ORDER BY name ASC");
     $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,10 +27,8 @@ try {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
     <style>
-        /* --- IMPORT FONTS --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        /* --- VARIABLES --- */
         :root {
             --tc-navy: #001a41;
             --tc-orange: #fca12b;
@@ -57,7 +53,6 @@ try {
             color: var(--text-main);
         }
 
-        /* --- HEADER --- */
         header {
             background-color: var(--tc-navy);
             color: var(--tc-white);
@@ -81,7 +76,6 @@ try {
         }
         .btn-back:hover { background: rgba(255,255,255,0.2); }
 
-        /* --- MAIN CONTAINER --- */
         .container {
             flex: 1;
             width: 100%;
@@ -94,7 +88,6 @@ try {
             align-items: center;
         }
 
-        /* --- CARD STYLE --- */
         .card {
             background: var(--tc-white);
             border-radius: 16px;
@@ -116,7 +109,6 @@ try {
         .card-header h3 { color: var(--tc-navy); margin: 0; font-size: 1.2rem; }
         .card-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 3px; margin-bottom: 0; }
 
-        /* --- FORM GRID LAYOUT --- */
         .upload-form {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -148,7 +140,6 @@ try {
             margin-bottom: 10px;
         }
 
-        /* --- INPUT STYLES --- */
         .form-group { margin-bottom: 0; }
         .form-group label {
             display: block; margin-bottom: 4px;
@@ -175,7 +166,6 @@ try {
 
         textarea.form-control { resize: none; height: 141px; }
 
-        /* --- CHOICES.JS CUSTOM STYLING --- */
         .choices { margin-bottom: 0; font-size: 0.9rem; }
         
         .choices__inner {
@@ -215,7 +205,6 @@ try {
             border-radius: 5px; margin-bottom: 5px; border: 1px solid #eee;
         }
 
-        /* --- DRAG & DROP AREA --- */
         .file-upload-area {
             flex: 1;
             border: 2px dashed #cbd5e0;
@@ -250,7 +239,6 @@ try {
             word-break: break-all; max-width: 90%;
         }
 
-        /* --- PROGRESS BAR --- */
         .progress-bar-container {
             width: 80%; height: 6px; background-color: #e2e8f0;
             border-radius: 3px; margin-top: 10px; overflow: hidden; display: none;
@@ -260,7 +248,6 @@ try {
         }
         .progress-text { font-size: 0.75rem; margin-top: 5px; color: var(--text-muted); display: none; }
 
-        /* --- BUTTONS --- */
         .action-buttons {
             display: flex; gap: 10px; flex-shrink: 0; margin-top: 0;
         }
@@ -283,7 +270,6 @@ try {
         }
         .btn-reset:hover { background: var(--tc-red); color: white; }
 
-        /* Alert */
         .status-message {
             margin-bottom: 10px; padding: 10px; border-radius: 8px;
             font-size: 0.85rem; text-align: center; display: none; flex-shrink: 0;
@@ -293,7 +279,6 @@ try {
 
         #pdf_file { display: none; }
 
-        /* Responsive Mobile */
         @media (max-width: 900px) {
             body { height: auto; overflow: auto; }
             .container { height: auto; display: block; }
@@ -392,7 +377,7 @@ try {
             const choices = new Choices(element, {
                 searchEnabled: true,
                 searchPlaceholderValue: 'Ketik nama mata kuliah...',
-                itemSelectText: '', // Hilangkan teks 'Press to select'
+                itemSelectText: '', 
                 shouldSort: false,
                 position: 'bottom',
                 placeholder: true,
