@@ -1,19 +1,16 @@
 <?php
 session_start();
 
-// 1. Cek Akses Admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
 }
 
-// 2. Koneksi Database
 require_once __DIR__ . '/../config/config.php';
 
 $message = '';
 $message_type = '';
 
-// --- LOGIKA PHP (BACKEND) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_user') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -76,10 +73,8 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- IMPORT FONTS --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        /* --- VARIABLES --- */
         :root {
             --tc-navy: #001a41;
             --tc-orange: #fca12b;
@@ -105,7 +100,6 @@ try {
             color: var(--text-main);
         }
 
-        /* --- HEADER --- */
         header {
             background-color: var(--tc-navy);
             color: var(--tc-white);
@@ -135,7 +129,6 @@ try {
         .btn-logout:hover { background: var(--tc-red); color: white; }
 
 
-        /* --- MAIN CONTAINER --- */
         .container {
             flex: 1; 
             max-width: 1400px;
@@ -149,7 +142,6 @@ try {
             overflow: hidden; 
         }
 
-        /* --- CARD STYLE --- */
         .card {
             background: var(--tc-white);
             border-radius: 16px;
@@ -171,7 +163,6 @@ try {
             flex-shrink: 0;
         }
 
-        /* Scrollable Area */
         .card-content-scroll {
             flex: 1;
             overflow-y: auto;
@@ -181,7 +172,6 @@ try {
             padding-bottom: 10px;
         }
 
-        /* --- FORM ELEMENTS --- */
         .form-group { margin-bottom: 12px; width: 100%; }
         
         .form-group label {
@@ -234,7 +224,6 @@ try {
         }
         .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        /* --- TABLE STYLE --- */
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 
         th {
