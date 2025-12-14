@@ -1,13 +1,11 @@
 <?php
 session_start();
-// Cek sesi login
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 require_once __DIR__ . '/../config/config.php';
 
-// Data Mata Kuliah
 $subjects = [
     "DM"  => "Data Mining", 
     "PS"  => "Pemodelan Stokastik", 
@@ -34,7 +32,6 @@ $subjects = [
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* Container Filter agar tidak mentok */
         .filter-section {
             margin-bottom: 30px;
         }
@@ -48,15 +45,13 @@ $subjects = [
             gap: 8px;
         }
 
-        /* Container tombol-tombol (Chips) */
         .filter-chips-container {
             display: flex;
-            flex-wrap: wrap; /* Agar turun ke bawah jika penuh */
-            gap: 10px;       /* Jarak antar tombol (kanan-kiri-atas-bawah) */
+            flex-wrap: wrap; 
+            gap: 10px;       
             align-items: center;
         }
 
-        /* Gaya Tombol Filter */
         .chip {
             border: 1px solid #e2e8f0;
             background: white;
@@ -75,9 +70,8 @@ $subjects = [
             transform: translateY(-1px);
         }
 
-        /* Gaya saat tombol aktif */
         .chip.active {
-            background: #001a41; /* Warna Navy */
+            background: #001a41; 
             color: white;
             border-color: #001a41;
             box-shadow: 0 4px 6px rgba(0, 26, 65, 0.2);
