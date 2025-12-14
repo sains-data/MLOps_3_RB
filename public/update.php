@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// 1. Cek Akses Admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit();
@@ -16,7 +15,6 @@ if (!isset($_GET['id'])) {
 $doc_id = $_GET['id'];
 
 try {
-    // Ambil data dokumen lama
     $stmt = $pdo->prepare("SELECT * FROM documents WHERE id = ?");
     $stmt->execute([$doc_id]);
     $doc = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -25,7 +23,6 @@ try {
         die("Dokumen tidak ditemukan.");
     }
 
-    // Ambil data mata kuliah
     $stmt_subj = $pdo->query("SELECT * FROM subjects ORDER BY name ASC");
     $courses = $stmt_subj->fetchAll(PDO::FETCH_ASSOC);
 
@@ -46,7 +43,6 @@ try {
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        /* --- VARIABLES (SAMA DENGAN UPLOAD) --- */
         :root {
             --tc-navy: #001a41;
             --tc-orange: #fca12b;
@@ -71,7 +67,6 @@ try {
             color: var(--text-main);
         }
 
-        /* --- HEADER --- */
         header {
             background-color: var(--tc-navy);
             color: var(--tc-white);
@@ -95,13 +90,11 @@ try {
         }
         .btn-back:hover { background: rgba(255,255,255,0.2); }
 
-        /* --- CONTAINER --- */
         .container {
             flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px;
             overflow: hidden; display: flex; justify-content: center; align-items: center;
         }
 
-        /* --- CARD --- */
         .card {
             background: var(--tc-white); border-radius: 16px; padding: 25px;
             box-shadow: var(--shadow-soft); width: 100%; height: 100%; max-height: 650px;
@@ -114,7 +107,6 @@ try {
         .card-header h3 { color: var(--tc-navy); margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
         .card-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 3px; margin-bottom: 0; }
 
-        /* --- FORM LAYOUT --- */
         .upload-form {
             display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
             flex: 1; overflow: hidden; 
@@ -134,7 +126,6 @@ try {
             min-height: 0; margin-bottom: 10px;
         }
 
-        /* --- INPUTS --- */
         .form-group { margin-bottom: 0; }
         .form-group label {
             display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.85rem; color: var(--text-main);
@@ -153,7 +144,6 @@ try {
         }
         textarea.form-control { resize: none; height: 141px; }
 
-        /* CHOICES JS */
         .choices__inner {
             background-color: var(--tc-gray); border: 1px solid transparent; border-radius: 8px;
             padding: 5px 12px; min-height: 44px; display: flex; align-items: center;
@@ -166,7 +156,6 @@ try {
             background-color: var(--tc-navy) !important; color: #fff !important;
         }
 
-        /* --- UPLOAD AREA --- */
         .file-upload-area {
             flex: 1; border: 2px dashed #cbd5e0; border-radius: 12px; background-color: #f8fafc;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -186,12 +175,10 @@ try {
         .browse-link { color: var(--tc-navy); font-weight: 600; text-decoration: underline; }
         .file-name-display { margin-top: 10px; font-weight: 600; font-size: 0.85rem; color: var(--text-main); }
 
-        /* Progress Bar */
         .progress-bar-container { width: 80%; height: 6px; background-color: #e2e8f0; border-radius: 3px; margin-top: 10px; overflow: hidden; display: none; }
         .progress-bar { height: 100%; width: 0%; background-color: var(--tc-navy); transition: width 0.3s ease; }
         .progress-text { font-size: 0.75rem; margin-top: 5px; color: var(--text-muted); display: none; }
 
-        /* Buttons */
         .action-buttons { display: flex; gap: 10px; flex-shrink: 0; margin-top: 0; }
         .btn-submit {
             flex: 2; padding: 12px; background: linear-gradient(135deg, var(--tc-navy), #0a2a5c);
