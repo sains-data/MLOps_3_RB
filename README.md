@@ -99,14 +99,12 @@ Bagian ini menjelaskan bagaimana project ini memenuhi komponen-komponen MLOps.
 Sistem menggunakan strategi **Batch Inference** dengan **Web Serving**.
 
 **1. Production Release**
-
-  * Aplikasi web dideploy menggunakan server lokal (XAMPP/Apache).
-  * File `index.php` bertindak sebagai *Serving Layer* dimana pengguna bisa mencari modul.
+* Aplikasi web dideploy menggunakan server lokal (XAMPP/Apache)
+* File index.php bertindak dimana pengguna bisa **Serving Layer** dimana pengguna bisa mencari modul.
 
 **2. Online Inference**
-
-  * Meskipun model AI berjalan *offline* (batch), hasil inferensinya disajikan secara *online* melalui fitur pencarian (`script.js` & `api.php`).
-  * Fitur **Upload Modul** (`upload.php`) memungkinkan penambahan data baru secara real-time ke dalam sistem.
+* Meskipun model AI berjalan **offline** (batch), hasil inferensinya disajikan secara **online** melalui fitur pencarian (script.js & api.php).
+* Fitur **Upload Modul** (upload.php) memungkinkan penambahan data baru secara real time ke dalam sistem
 
 -----
 
