@@ -156,7 +156,8 @@ Menerapkan konsep **Human-in-the-Loop (HITL)** untuk mengatasi kelemahan AI (Hal
 
 ```
 project_mlops/
-├── assets/                 # Gambar untuk Readme (Screenshot, Banner, Diagram)
+├── fonts/
+├── assets/                 # Dokumentasi hasil web
 ├── config/
 │   └── config.php          # Koneksi Database PDO MySQL
 ├── core/
@@ -170,7 +171,7 @@ project_mlops/
 │   ├── script_upload.js    # Logika Upload (Drag & Drop)
 │   └── script_update.js    # Logika Update Data
 ├── css/
-│   ├── style.css           # UI Utama (Modern Gradient)
+│   ├── style.css           # UI Utama 
 │   ├── style_admin.css     # UI Halaman Admin
 │   ├── style_detail.css    # UI Halaman Detail Modul
 │   └── style_upload.css    # UI Halaman Upload
