@@ -1,7 +1,5 @@
 # Project MLOps: Repository Modul Praktikum Sains Data 🚀
 
-**Sistem Repository Cerdas Berbasis Generative AI & Web Application**
-
 Project ini bertujuan untuk membangun sistem manajemen untuk modul praktikum Sains Data. Sistem ini mengintegrasikan **Workflow MLOps** (Machine Learning Operations) mulai dari pengambilan data (Ingestion), pemrosesan menggunakan LLM (Large Language Model), hingga deployment ke aplikasi web interaktif dengan mekanisme monitoring *Human-in-the-Loop*.
 
 -----
