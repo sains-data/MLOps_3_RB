@@ -156,25 +156,38 @@ Menerapkan konsep **Human-in-the-Loop (HITL)** untuk mengatasi kelemahan AI (Hal
 
 ```
 project_mlops/
+├── assets/                 # Gambar untuk Readme (Screenshot, Banner, Diagram)
 ├── config/
-│   └── config.php          # Koneksi Database
+│   └── config.php          # Koneksi Database PDO MySQL
+├── core/
+│   ├── functions.php       # Helper Functions Umum
+│   └── functions_upload.php # Helper Functions Upload
 ├── data/
-│   └── indexing_final_db.csv # Output dari Model AI
+│   └── indexing_final_db.csv # Output dari Model AI (Feature Store sementara)
 ├── uploads/                # Penyimpanan File PDF Fisik
 ├── js/
-│   ├── script.js           # Logika Dashboard & Search
+│   ├── script.js           # Logika Dashboard & Search (Frontend)
 │   ├── script_upload.js    # Logika Upload (Drag & Drop)
 │   └── script_update.js    # Logika Update Data
 ├── css/
 │   ├── style.css           # UI Utama (Modern Gradient)
 │   ├── style_admin.css     # UI Halaman Admin
-│   └── ...
-├── mlops.ipynb             # [CORE] Script Python AI/MLOps
+│   ├── style_detail.css    # UI Halaman Detail Modul
+│   └── style_upload.css    # UI Halaman Upload
+├── mlops.ipynb             # [CORE] Script Python AI Pipeline (Colab)
 ├── index.php               # Halaman Utama (Serving Layer)
-├── admin.php               # Dashboard Monitoring
-├── import_data.php         # Script Registering Model Output
-├── api.php                 # API Endpoint JSON
-└── README.md               # Dokumentasi Project
+├── admin.php               # Dashboard Monitoring (Monitoring Layer)
+├── login.php               # Halaman Login
+├── logout.php              # Script Logout
+├── upload.php              # Halaman Upload Modul (Ingestion)
+├── update.php              # Halaman Edit Modul (Governance/HITL)
+├── process_upload.php      # Backend Proses Upload
+├── process_update.php      # Backend Proses Update
+├── delete_document.php     # Backend Hapus Dokumen
+├── import_data.php         # Script Registering Model Output (CSV to SQL)
+├── reset_admin.php         # Script Reset User Admin Default
+├── api.php                 # API Endpoint JSON untuk Frontend
+└── README.md               # Dokumentasi Project (File Ini)
 ```
 
 -----
